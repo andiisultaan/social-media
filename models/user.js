@@ -12,10 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       User.hasMany(models.Like);
 
       //comment
-      User.hasMany(models.comment);
-
-      //follow
-      User.hasMany(models.Follow);
+      User.hasMany(models.Comment);
 
       //follow
       User.hasMany(models.Post);
