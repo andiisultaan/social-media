@@ -11,6 +11,7 @@
   <body class="bg-gray-900 h-screen">
     <!-- Navbar -->
     <%- include('_nav') %>
+
     <!-- End of Navbar -->
 
     <!-- Main Content -->
@@ -18,31 +19,46 @@
       <!-- Padding top to avoid overlap with navbar -->
       <section class="post flex justify-center w-full">
         <div class="bg-gray-800 flex flex-col h-full w-full max-w-screen-lg mx-auto">
-          <% users.forEach(element => { %>
           <div class="card text-white mx-3 items-center justify-center flex gap-4 flex-col">
             <div class="pt-5 w-full flex flex-col justify-center">
-              <a href="/post/<%= element.id %>">
+              <a href="">
                 <div class="flex items-center space-x-3">
                   <img src="https://via.placeholder.com/48" alt="profile" class="rounded-full w-12 h-12" />
                   <div>
-                    <h2 class="text-white font-bold"><%= element.User.Profile.name %></h2>
-                    <span class="text-gray-500">@<%= element.User.username %></span>
+                    <h2 class="text-white font-bold"><%= post.User.Profile.name %></h2>
+                    <span class="text-gray-500">@<%= post.User.username %></span>
                   </div>
                 </div>
               </a>
               <div class="w-full flex">
-                <p><%= element.caption %></p>
+                <p><%= post.caption %></p>
               </div>
             </div>
             <div class="w-full flex-col">
-              <img src="<%= element.image %>" class="max-w-[100%] rounded-md" alt="" />
+              <img src="<%= post.image %>" class="max-w-[100%] rounded-md" alt="" />
               <div class="p-4 w-full flex gap-8">
-                <a href="" id="comment"><i class="fa fa-comment" aria-hidden="true"></i></a>
+                <a href="" id="comment"><i class="fa fa-comment"></i></a>
                 <a href="" id="like"><img src="image/heart.png" alt="" class="text-w" /></a>
               </div>
+              <a href="/post"><button>Like</button></a> <br />
+              <form method="post">
+                <textarea name="comment" class="text-black"></textarea>
+                <br />
+                <button type="submit">Post Comment</button>
+              </form>
+              <br />
+              <h1>Comments</h1>
+              <br />
+              <hr />
+              <% post.Comments.forEach(element => { %>
+              <h3><%= element.User.username %></h3>
+              <p>===><%= element.comment %></p>
+              <hr />
+              <% if (!locals.user) { %>
+              <button>delete</button>
+              <% } %> <% }) %>
             </div>
           </div>
-          <% }) %>
         </div>
       </section>
     </main>

@@ -6,6 +6,7 @@ const port = 3000;
 
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: false }));
+app.use(express.static("public"));
 app.use(
   session({
     secret: "rahasiaa",
@@ -17,7 +18,15 @@ app.use(
     },
   })
 );
-app.use(express.static("public"));
+
+app.use((req, res, next) => {
+  app.locals = {
+    user: req.session.user,
+  };
+
+  next();
+});
+
 app.use(router);
 
 app.listen(port, () => {

@@ -11,7 +11,10 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Post.hasMany(models.Like);
       // comment
-      Post.hasMany(models.Comment);
+      Post.hasMany(models.Comment, {
+        foreignKey: "PostId",
+        onDelete: "CASCADE",
+      });
       // user
       Post.belongsTo(models.User);
     }
@@ -20,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       caption: DataTypes.STRING,
       image: DataTypes.TEXT,
-      ProfileId: DataTypes.INTEGER,
+      UserId: DataTypes.INTEGER,
     },
     {
       sequelize,
