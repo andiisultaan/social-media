@@ -1,28 +1,32 @@
 const Controller = require("../controllers/controller");
 const router = require("express").Router();
 
-//get and post register
+// Route untuk halaman register (GET dan POST)
 router.get("/register", Controller.renderRegister);
 router.post("/register", Controller.handleRegister);
 
-//get and post login
+// Route untuk halaman login (GET dan POST)
 router.get("/login", Controller.renderLogin);
 router.post("/login", Controller.handleLogin);
 
-router.use(function (req, res, next) {
-  // if (req.session.userId) {
-  //   next();
-  // } else {
-  //   res.redirect("/");
-  // }
-  console.log(req.session);
-});
-// get landing page
+// Middleware untuk cek apakah user sudah login
+// router.use((req, res, next) => {
+//   if (req.session.userId) {
+//     // Jika user sudah login, lanjut ke halaman berikutnya
+//     next();
+//   } else {
+//     // Jika user belum login, redirect ke halaman home (landing page)
+//     res.redirect("/");
+//   }
+// });
+
+// Route untuk halaman landing page (public, tanpa perlu login)
 router.get("/", Controller.renderHome);
 
-// router.get("/logout", Controller.handleLogout);
+// Route untuk halaman profile user (hanya bisa diakses jika login)
+router.get("/user/:id/profile", Controller.renderProfile);
 
-//middleware
+// Route untuk handle logout
+router.get("/logout", Controller.handleLogout);
 
-// router.get("/user/:id/profile", checkSession, Controller.renderProfile);
 module.exports = router;

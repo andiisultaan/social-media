@@ -69,11 +69,16 @@ class Controller {
   static async renderHome(req, res) {
     try {
       const loggedIn = !!req.session.userId;
+      const userId = req.session.userId || null;
       const username = req.session.username || null;
 
-      const users = await User.findAll();
+      const user = await User.findOne({
+        where: {
+          id: userId,
+        },
+      });
 
-      res.render("home", { loggedIn, username, users });
+      res.render("home", { loggedIn, username, userId, user });
     } catch (error) {
       console.log(error);
       res.send(error.message);
@@ -87,6 +92,17 @@ class Controller {
       console.log(error);
       res.send(error.message);
     }
+  }
+
+  static handleLogout(req, res) {
+    req.session.destroy(err => {
+      if (err) {
+        console.log(err);
+        res.send("Gagal logout");
+      } else {
+        res.redirect("/"); // Redirect ke halaman home setelah logout
+      }
+    });
   }
 }
 
