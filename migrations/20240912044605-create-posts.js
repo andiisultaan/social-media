@@ -10,7 +10,7 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       caption: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(50),
       },
       image: {
         type: Sequelize.TEXT,

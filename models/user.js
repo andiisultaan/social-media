@@ -32,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   //Hook hash password
-  User.beforeCreate(instance => {
+  User.beforeSave(instance => {
     let salt = bcrypt.genSaltSync(10);
     let hash = bcrypt.hashSync(instance.password, salt);
     instance.password = hash;
