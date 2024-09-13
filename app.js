@@ -1,5 +1,6 @@
 const express = require("express");
 const router = require("./routers");
+const path = require("path");
 const app = express();
 const session = require("express-session");
 const port = 3000;
@@ -7,6 +8,7 @@ const port = 3000;
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static("public"));
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use(
   session({
     secret: "rahasiaa",

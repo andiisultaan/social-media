@@ -20,26 +20,28 @@
         <% if (error) { %>
         <p style="color: red;"><%= error %></p>
         <% } %>
+
         <div class="mb-4">
           <label class="block text-gray-400 text-sm font-medium" for="name">Username</label>
           <input class="mt-1 w-full px-4 py-2 bg-gray-700 text-white border border-gray-600 rounded-lg focus:ring-indigo-500 focus:border-indigo-500" type="text" id="name" name="username" />
         </div>
-        <!-- <div class="mb-4">
-          <label class="block text-gray-400 text-sm font-medium" for="email">Email address</label>
-          <input class="mt-1 w-full px-4 py-2 bg-gray-700 text-white border border-gray-600 rounded-lg focus:ring-indigo-500 focus:border-indigo-500" type="email" id="email" name="email" />
-        </div> -->
+
         <div class="mb-6">
           <label class="block text-gray-400 text-sm font-medium" for="password">Password</label>
           <input class="mt-1 w-full px-4 py-2 bg-gray-700 text-white border border-gray-600 rounded-lg focus:ring-indigo-500 focus:border-indigo-500" type="password" id="password" name="password" />
         </div>
-
-        <!-- Forgot password link -->
 
         <!-- Sign in button -->
         <button type="submit" class="w-full bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg transition">LOG IN</button>
       </form>
 
       <!-- Sign up link -->
+      <div class="text-center mt-6">
+        <p class="text-gray-400">
+          Don't have an account?
+          <a href="/register" class="text-indigo-500 hover:text-indigo-600 font-bold">Sign Up</a>
+        </p>
+      </div>
     </div>
   </body>
 </html>

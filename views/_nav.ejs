@@ -1,51 +1,63 @@
-<nav class="bg-gray-800 text-white py-4">
-  <div class="container mx-auto flex items-center justify-between px-4">
-    <!-- Logo -->
-    <a href="/home" class="flex items-center">
-      <h1 class="text-xl font-semibold">Apps</h1>
-    </a>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Y</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css" />
+    <!-- Toastify CSS -->
+  </head>
+  <nav class="bg-gray-800 text-white py-4">
+    <div class="container mx-auto flex items-center justify-between px-4">
+      <!-- Logo -->
+      <a href="/home" class="flex items-center">
+        <h1 class="text-xl font-semibold">Apps</h1>
+      </a>
 
-    <!-- Konten utama -->
-    <div class="flex items-center gap-7">
-      <% if (locals.user?.role === "user") { %>
-      <!-- Jika user sudah login -->
-      <div class="flex items-center space-x-4">
-        <a href="/profile" class="flex items-center space-x-2">
-          <img src="https://via.placeholder.com/48" alt="profile" class="rounded-full w-12 h-12" />
-          <div>
-            <h2 class="font-bold"><%= user.name %></h2>
-          </div>
-        </a>
+      <!-- Konten utama -->
+      <div class="flex items-center gap-7">
+        <% if (locals.user?.role === "user") { %>
+
+        <!-- Jika user sudah login -->
+        <div class="flex items-center space-x-4">
+          <a href="/profile" class="flex items-center space-x-2">
+            <img src="https://via.placeholder.com/48" alt="profile" class="rounded-full w-12 h-12" />
+            <div>
+              <h2 class="font-bold"><%= user.name %></h2>
+            </div>
+          </a>
+        </div>
+
+        <!-- Search Section -->
+        <form action="" method="get" class="flex items-center">
+          <input type="text" placeholder="search" name="search" class="py-1 px-3 w-64 rounded-md bg-gray-700 border border-gray-600" />
+        </form>
+
+        <!-- Add New Post Button -->
+        <a href="/addPost"><button id="addPost" class="bg-slate-600 rounded-lg py-2 px-4">Add New Post</button></a>
+
+        <% } else { %>
+        <!-- Jika user belum login -->
+        <div class="flex space-x-4">
+          <a href="/login">
+            <button class="bg-blue-600 text-white rounded-lg py-2 px-4">Login</button>
+          </a>
+          <a href="/register">
+            <button class="bg-green-600 text-white rounded-lg py-2 px-4">Register</button>
+          </a>
+        </div>
+        <% } %>
       </div>
 
-      <!-- Search Section -->
-      <form action="" method="get" class="flex items-center">
-        <input type="text" placeholder="search" class="py-1 px-3 w-64 rounded-md bg-gray-700 border border-gray-600" />
-      </form>
-
-      <!-- Add New Post Button -->
-      <a href="/addPost"><button id="addPost" class="bg-slate-600 rounded-lg py-2 px-4">Add New Post</button></a>
-
-      <% } else { %>
-      <!-- Jika user belum login -->
-      <div class="flex space-x-4">
-        <a href="/login">
-          <button class="bg-blue-600 text-white rounded-lg py-2 px-4">Login</button>
-        </a>
-        <a href="/register">
-          <button class="bg-green-600 text-white rounded-lg py-2 px-4">Register</button>
+      <!-- Tombol logout -->
+      <% if (locals.user?.role === "user") { %>
+      <div>
+        <a href="/logout">
+          <button class="bg-red-600 text-white rounded-lg py-2 px-4">Logout</button>
         </a>
       </div>
       <% } %>
     </div>
-
-    <!-- Tombol logout -->
-    <% if (locals.user?.role === "user") { %>
-    <div>
-      <a href="/logout">
-        <button class="bg-red-600 text-white rounded-lg py-2 px-4">Logout</button>
-      </a>
-    </div>
-    <% } %>
-  </div>
-</nav>
+  </nav>
+</html>

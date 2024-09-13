@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sign In</title>
+    <title>Sign Up</title>
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
 
@@ -12,21 +12,21 @@
       <div class="text-center mb-6">
         <!-- Logo icon -->
         <div class="mb-4"></div>
-        <h2 class="text-white text-2xl font-bold">Sign in to your account</h2>
+        <h2 class="text-white text-2xl font-bold">Sign up for an account</h2>
       </div>
 
       <!-- Form -->
       <form action="#" method="POST">
         <div class="mb-4">
-          <label class="block text-gray-400 text-sm font-medium" for="name">Username</label>
-          <input class="mt-1 w-full px-4 py-2 bg-gray-700 text-white border border-gray-600 rounded-lg focus:ring-indigo-500 focus:border-indigo-500" type="text" id="email" name="username" />
+          <label class="block text-gray-400 text-sm font-medium" for="username">Username</label>
+          <input class="mt-1 w-full px-4 py-2 bg-gray-700 text-white border border-gray-600 rounded-lg focus:ring-indigo-500 focus:border-indigo-500" type="text" id="username" name="username" />
         </div>
         <div class="mb-6">
           <label class="block text-gray-400 text-sm font-medium" for="password">Password</label>
           <input class="mt-1 w-full px-4 py-2 bg-gray-700 text-white border border-gray-600 rounded-lg focus:ring-indigo-500 focus:border-indigo-500" type="password" id="password" name="password" />
         </div>
         <div class="mb-6">
-          <label class="block text-gray-400 text-sm font-medium" for="Name">Name</label>
+          <label class="block text-gray-400 text-sm font-medium" for="name">Name</label>
           <input class="mt-1 w-full px-4 py-2 bg-gray-700 text-white border border-gray-600 rounded-lg focus:ring-indigo-500 focus:border-indigo-500" type="text" id="name" name="name" />
         </div>
 
@@ -35,13 +35,17 @@
           <input class="mt-1 w-full px-4 py-2 bg-gray-700 text-white border border-gray-600 rounded-lg focus:ring-indigo-500 focus:border-indigo-500" type="email" id="email" name="email" />
         </div>
 
-        <!-- Forgot password link -->
-
-        <!-- Sign in button -->
-        <button type="submit" class="w-full bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg transition">Sign in</button>
+        <!-- Sign up button -->
+        <button type="submit" class="w-full bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg transition">Sign up</button>
       </form>
 
-      <!-- Sign up link -->
+      <!-- Login link -->
+      <div class="text-center mt-6">
+        <p class="text-gray-400">
+          Already have an account?
+          <a href="/login" class="text-indigo-500 hover:text-indigo-600 font-bold">Log in</a>
+        </p>
+      </div>
     </div>
   </body>
 </html>

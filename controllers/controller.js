@@ -1,5 +1,7 @@
-const { User, Profile, Comment, Like, Post } = require("../models/index");
+const { User, Profile, Comment, Like, Post, sequelize } = require("../models/index");
 const bcrypt = require("bcryptjs");
+const getTime = require("../helpers/index");
+const { Op } = require("sequelize");
 
 class Controller {
   static async renderRegister(req, res) {
@@ -67,19 +69,11 @@ class Controller {
   }
 
   static async renderHome(req, res) {
+    const { search } = req.query;
     try {
-      const users = await Post.findAll({
-        include: {
-          model: User,
-          where: {
-            role: "user",
-          },
-          include: Profile,
-        },
-        order: [["id", "DESC"]],
-      });
+      let users = await Post.getUsers(search);
       //   res.send(users);
-      res.render("home", { users });
+      res.render("home", { users, getTime });
     } catch (error) {
       console.log(error);
       res.send(error.message);
@@ -212,7 +206,7 @@ class Controller {
       });
       //   req.session.post = { id: post.id, role: post.role, name: post.username };
       //   res.send(post);
-      res.render("post", { post });
+      res.render("post", { post, getTime });
     } catch (error) {
       console.log(error);
       res.send(error.message);

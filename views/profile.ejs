@@ -9,68 +9,69 @@
   </head>
 
   <body class="bg-gray-900 h-screen">
+    <!-- Navbar -->
     <%- include('_nav') %>
-    <form action="" method="post">
-      <div class="bg-gray-800 flex flex-col h-full w-full max-w-screen-lg mx-auto">
-        <div class="relative">
-          <div class="h-32 bg-gradient-to-r from-red-500 to-purple-500"></div>
-          <div class="absolute bottom-0 left-4 transform translate-y-1/2">
-            <div class="w-24 h-24 rounded-full border-4 border-gray-900 overflow-hidden">
-              <!-- profile picture -->
 
-              <img src="<%= profile.profilePicture %>" alt="Profile" class="w-full h-full object-cover" />
-            </div>
-          </div>
-        </div>
-
-        <div class="pt-16 px-6 pb-6">
-          <div class="flex justify-between items-center mb-4">
-            <div>
-              <label for="profilePicture" class="text-white">Profile Picture</label><br />
-              <input type="text" name="profilePicture" id="" value="<%= profile.profilePicture %>" />
-              <br />
-              <br />
-              <!-- username -->
-              <label for="name" class="text-white">Name : <%= profile.name %></label><br />
-              <span> <input type="text" name="name" value="<%= profile.name %>" /></span>
-              <a href="">
-                <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition">Edit profile</button>
-              </a>
-            </form>
-              <br />
-              <br />
-              <table class="min-w-full text-white border border-slate-500 table-auto">
-                <thead class="bg-gray-800">
-                  <tr>
-                    <th class="px-4 py-2 border border-slate-600">Post</th>
-                    <th class="px-4 py-2 border border-slate-600">Caption</th>
-                    <th class="px-4 py-2 border border-slate-600">Action</th>
-                  </tr>
-                </thead>
-                <tbody class="bg-gray-700">
-                  <% posts.Posts.forEach(element => { %>
-                  <tr class="border-t border-slate-600">
-                    <td class="px-4 py-2">
-                      <img src="<%= element.image %>" alt="" class="w-24 h-24 object-cover" />
-                    </td>
-                    <td class="px-4 py-2"><%= element.caption %></td>
-                    <td class="px-4 py-2">
-                      <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded">
-                      <a href="/profile/delete/<%= element.id %>">
-                        Delete
-
-                      </a>
-                    </button>
-                    </td>
-                  </tr>
-                  <% }) %>
-                </tbody>
-              </table>
-            </div>
-            <!-- router ke edit profile -->
+    <!-- Profile Section -->
+    <div class="bg-gray-800 flex flex-col h-full w-full max-w-screen-lg mx-auto rounded-lg shadow-lg mt-10 p-6">
+      <!-- Profile Header -->
+      <div class="relative">
+        <div class="h-32 bg-gradient-to-r from-red-500 to-purple-500 rounded-t-lg"></div>
+        <div class="absolute bottom-0 left-4 transform translate-y-1/2">
+          <div class="w-24 h-24 rounded-full border-4 border-gray-900 overflow-hidden">
+            <!-- Profile Picture -->
+            <img src="/uploads/<%= profile.profilePicture %>" alt="Profile" class="w-full h-full object-cover" />
           </div>
         </div>
       </div>
-    
+
+      <!-- Profile Information -->
+      <div class="pt-16 px-6 pb-6">
+        <form action="/profile" method="post" enctype="multipart/form-data" class="space-y-4">
+          <div class="space-y-2">
+            <!-- Profile Header with Enhanced Styling -->
+            <div class="flex items-center gap-2">
+              <h1 class="text-white text-2xl font-bold border-b-2 border-blue-500 pb-2"><%= profile.name %></h1>
+            </div>
+            <hr class="border-t-2 border-gray-600 my-4" />
+
+            <!-- Profile Picture Upload -->
+            <label for="profilePicture" class="text-white">Profile Picture</label>
+            <input type="file" name="profilePicture" class="w-full p-2 rounded-md bg-gray-200 text-black" />
+
+            <!-- Name Field -->
+            <label for="name" class="text-white">Name</label>
+            <input type="text" name="name" class="w-full p-2 rounded-md bg-gray-200 text-black" value="<%= profile.name %>" />
+          </div>
+
+          <!-- Edit Button -->
+          <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition">Edit Profile</button>
+        </form>
+        <div class="mt-6">
+          <table class="min-w-full text-white border border-slate-500 table-auto">
+            <thead class="bg-gray-800">
+              <tr>
+                <th class="px-4 py-2 border border-slate-600">Post</th>
+                <th class="px-4 py-2 border border-slate-600">Caption</th>
+                <th class="px-4 py-2 border border-slate-600">Action</th>
+              </tr>
+            </thead>
+            <tbody class="bg-gray-700">
+              <% posts.Posts.forEach(element => { %>
+              <tr class="border-t border-slate-600">
+                <td class="px-4 py-2">
+                  <img src="<%= element.image %>" alt="Post Image" class="w-24 h-24 object-cover rounded-md" />
+                </td>
+                <td class="px-4 py-2"><%= element.caption %></td>
+                <td class="px-4 py-2">
+                  <a href="/profile/delete/<%= element.id %>" class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded">Delete</a>
+                </td>
+              </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

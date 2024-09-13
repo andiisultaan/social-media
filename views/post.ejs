@@ -1,69 +1,75 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sign In</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css" />
-  </head>
+
 
   <body class="bg-gray-900 h-screen">
     <!-- Navbar -->
     <%- include('_nav') %>
-
     <!-- End of Navbar -->
 
     <!-- Main Content -->
     <main class="pt-20 px-10">
-      <!-- Padding top to avoid overlap with navbar -->
       <section class="post flex justify-center w-full">
-        <div class="bg-gray-800 flex flex-col h-full w-full max-w-screen-lg mx-auto">
+        <div class="bg-gray-800 flex flex-col h-full w-full max-w-screen-lg mx-auto rounded-lg shadow-lg p-6">
           <div class="card text-white mx-3 items-center justify-center flex gap-4 flex-col">
             <div class="pt-5 w-full flex flex-col justify-center">
-              <a href="">
-                <div class="flex items-center space-x-3">
-                  <img src="https://via.placeholder.com/48" alt="profile" class="rounded-full w-12 h-12" />
-                  <div>
-                    <h2 class="text-white font-bold"><%= post.User.Profile.name %></h2>
-                    <span class="text-gray-500">@<%= post.User.username %></span>
-                  </div>
+              <!-- User Profile and Post Info -->
+              <div class="flex items-center space-x-3">
+                <img src="https://via.placeholder.com/48" alt="profile" class="rounded-full w-12 h-12" />
+                <div>
+                  <h2 class="text-white font-bold text-lg"><%= post.User.Profile.name %></h2>
+                  <span class="text-gray-500">@<%= post.User.username %></span>
                 </div>
-              </a>
-              <div class="w-full flex">
-                <p><%= post.caption %></p>
+              </div>
+              <!-- Posted Date -->
+              <p class="text-gray-400 mt-1">Posted <%= getTime(post.createdAt) %></p>
+              <!-- Post Caption -->
+              <div class="mt-4">
+                <p class="text-gray-300"><%= post.caption %></p>
               </div>
             </div>
-            <div class="w-full flex-col">
-              <img src="<%= post.image %>" class="max-w-[100%] rounded-md" alt="" />
-              <div class="p-4 w-full flex gap-8">
-                <a href="" id="comment"><i class="fa fa-comment"></i></a>
-                <a href="" id="like"><img src="image/heart.png" alt="" class="text-w" /></a>
-              </div>
-              <a href="/post"><button>Like</button></a> <br />
-              <form method="post">
-                <textarea name="comment" class="text-black"></textarea>
+
+            <!-- Post Image -->
+            <div class="w-full flex flex-col mt-4">
+              <img src="<%= post.image %>" class="max-w-full rounded-md object-cover" alt="Post Image" />
+
+              <!-- Comment Form -->
+              <form id="commentForm" method="post" action="/post/<%= post.id %>" class="mt-4">
+                <textarea name="comment" id="commentText" class="w-full p-2 rounded-md bg-gray-200 text-black" placeholder="Write a comment..."></textarea>
                 <br />
-                <button type="submit">Post Comment</button>
+                <button type="submit" class="mt-2 bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md">Post Comment</button>
               </form>
-              <br />
-              <h1>Comments</h1>
-              <br />
-              <hr />
-              <% post.Comments.forEach(element => { %>
-              <h3><%= element.User.username %></h3>
-              <p>===><%= element.comment %></p>
-              <hr />
-              <% if (!locals.user) { %>
-              <button>delete</button>
-              <% } %> <% }) %>
+
+              <!-- Loop through comments -->
+              <div class="mt-6">
+                <h1 class="text-white text-xl font-bold mb-4">Comments</h1>
+
+                <!-- Loop for each comment -->
+                <% post.Comments.forEach(element => { %>
+                <div class="bg-gray-700 p-4 rounded-lg shadow-md mt-4">
+                  <div class="flex items-center space-x-3">
+                    <!-- Avatar for the comment user -->
+                    <img src="https://via.placeholder.com/48" alt="User Avatar" class="w-10 h-10 rounded-full" />
+
+                    <div>
+                      <h3 class="text-white font-semibold text-lg"><%= element.User.username %></h3>
+                      <p class="text-gray-400 text-sm">Posted on <%=getTime(element.createdAt)  %></p>
+                    </div>
+                  </div>
+
+                  <!-- Comment Text -->
+                  <div class="mt-2 bg-gray-800 p-3 rounded-lg text-gray-300">
+                    <p><%= element.comment %></p>
+                  </div>
+
+                  <!-- Horizontal line separator -->
+                  <hr class="border-gray-600 mt-4" />
+                </div>
+                <% }) %>
+              </div>
             </div>
           </div>
         </div>
       </section>
     </main>
     <!-- End of Main Content -->
-
-    <!-- <script src="/script/script.js"></script> -->
   </body>
 </html>

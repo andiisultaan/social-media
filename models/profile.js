@@ -2,6 +2,9 @@
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Profile extends Model {
+    get name() {
+      return `--${this.name}--`;
+    }
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.

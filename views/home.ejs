@@ -3,23 +3,24 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sign In</title>
+    <title>Y</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css" />
+    <!-- Toastify CSS -->
   </head>
 
-  <body class="bg-gray-900 h-screen">
+  <body class="bg-gray-900 min-h-screen">
     <!-- Navbar -->
-    <%- include('_nav') %>
     <!-- End of Navbar -->
 
     <!-- Main Content -->
+    <%- include('_nav') %>
     <main class="pt-20 px-10">
       <!-- Padding top to avoid overlap with navbar -->
-      <section class="post flex justify-center w-full">
-        <div class="bg-gray-800 flex flex-col h-full w-full max-w-screen-lg mx-auto">
+      <section class="post flex justify-center w-full py-8 h-auto">
+        <div class="bg-gray-800 flex flex-col w-full max-w-screen-lg mx-auto rounded">
           <% users.forEach(element => { %>
-          <div class="card text-white mx-3 items-center justify-center flex gap-4 flex-col">
+          <div class="card text-white mx-3 items-center justify-center flex gap-4 flex-col mb-6">
             <div class="pt-5 w-full flex flex-col justify-center">
               <a href="/post/<%= element.id %>">
                 <div class="flex items-center space-x-3">
@@ -35,10 +36,11 @@
               </div>
             </div>
             <div class="w-full flex-col">
-              <img src="<%= element.image %>" class="max-w-[100%] rounded-md" alt="" />
+              <img src="<%= element.image %>" class="w-64 h-64 object-cover rounded-md" alt="Image" />
               <div class="p-4 w-full flex gap-8">
-                <a href="" id="comment"><i class="fa fa-comment" aria-hidden="true"></i></a>
-                <a href="" id="like"><img src="image/heart.png" alt="" class="text-w" /></a>
+                <div>
+                  <p><%=getTime(element.User.Profile.createdAt) %></p>
+                </div>
               </div>
             </div>
           </div>
@@ -47,7 +49,5 @@
       </section>
     </main>
     <!-- End of Main Content -->
-
-    <!-- <script src="/script/script.js"></script> -->
   </body>
 </html>
